@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: player
+  name: player-deployment
+  namespace: player
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: player
+  template:
+    metadata:
+      labels:
+        app: player
+    spec:
+      containers:
+        - image: music:v2
+          imagePullPolicy: Never
+          name: player
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              cpu: 0.1
+              memory: 1Mi
+            limits:
+              cpu: 0.1
+              memory: 1Mi
